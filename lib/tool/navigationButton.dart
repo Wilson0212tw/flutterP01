@@ -3,6 +3,7 @@ import 'package:flutter/painting.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class NavigationButton extends StatefulWidget {
+  final routerString;
   final height;
   final width;
   final type;
@@ -13,7 +14,11 @@ class NavigationButton extends StatefulWidget {
     4: AnimatedIcons.play_pause
   };
 
-  NavigationButton({this.type = 1, this.height = 30, this.width = 30});
+  NavigationButton(
+      {this.routerString = '',
+      this.type = 1,
+      this.height = 30,
+      this.width = 30});
 
   @override
   _NavigationButtonState createState() => _NavigationButtonState();
@@ -77,7 +82,10 @@ class _NavigationButtonState extends State<NavigationButton>
             //   shape: BoxShape.circle,
             // ),
             child: IconButton(
-                onPressed: animate,
+                onPressed: () {
+                  animate();
+                  Navigator.pushNamed(context, widget.routerString ?? '/home');
+                },
                 icon: AnimatedIcon(
                   icon: widget.switchIconMap[widget.type],
                   progress: _animateIcon,

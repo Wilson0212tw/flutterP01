@@ -19,7 +19,9 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          title: Text(widget.title),
+        ),
         // floatingActionButtonAnimator: _FloatingButtonAnimator(),
         floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
         floatingActionButton: FancyFab(),
@@ -31,18 +33,22 @@ class _HomePageState extends State<HomePage>
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               NavigationButton(
+                  routerString: '/page1',
                   type: 1,
                   width: MediaQuery.of(context).size.width / 5,
                   height: MediaQuery.of(context).size.width / 5),
               NavigationButton(
+                  routerString: '/page2',
                   type: 2,
                   width: MediaQuery.of(context).size.width / 5,
                   height: MediaQuery.of(context).size.width / 5),
               NavigationButton(
+                  routerString: '/page1',
                   type: 3,
                   width: MediaQuery.of(context).size.width / 5,
                   height: MediaQuery.of(context).size.width / 5),
               NavigationButton(
+                  routerString: '/page1',
                   type: 4,
                   width: MediaQuery.of(context).size.width / 5,
                   height: MediaQuery.of(context).size.width / 5),
@@ -50,36 +56,6 @@ class _HomePageState extends State<HomePage>
             ],
           ),
         ));
-  }
-}
-
-// AnimationToolkit.dart
-class AnimationToolkit {
-  // ...
-  static const FloatingActionButtonAnimator floatingButtonAnimator =
-      _FloatingButtonAnimator();
-}
-
-class _FloatingButtonAnimator extends FloatingActionButtonAnimator {
-  const _FloatingButtonAnimator();
-
-  @override
-  Animation<double> getScaleAnimation({Animation<double> parent}) {
-    return parent.drive(Tween<double>(begin: 1, end: 1.0));
-  }
-
-  @override
-  Animation<double> getRotationAnimation({Animation<double> parent}) {
-    return parent.drive(Tween<double>(begin: 0, end: 1.0));
-  }
-
-  @override
-  Offset getOffset({Offset begin, Offset end, double progress}) {
-    if (progress < 0.5) {
-      return begin;
-    } else {
-      return end;
-    }
   }
 }
 
