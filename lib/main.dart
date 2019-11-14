@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterp01/page2.dart';
 import './home.dart';
 import 'page1.dart';
+import 'page3.dart';
 
 void main() => runApp(MyApp());
 
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         '/home': (context) => HomePage(),
         '/page1': (context) => Page1(title: 'Page1'),
         '/page2': (context) => Page2(title: 'Page1'),
+        '/page3': (context) => Page3(title: 'Page3'),
       },
     );
   }

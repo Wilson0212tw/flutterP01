@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:english_words/english_words.dart';
 
 class Page2 extends StatefulWidget {
   Page2({Key key, this.title}) : super(key: key);
@@ -19,18 +20,9 @@ class Page2 extends StatefulWidget {
 }
 
 class _Page2State extends State<Page2> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+  final wordList =
+      generateWordPairs().take(100).map((e) => e.asPascalCase).toList();
+  final wordBoolList = List.generate(100, (i) => true);
 
   @override
   Widget build(BuildContext context) {
@@ -47,40 +39,81 @@ class _Page2State extends State<Page2> {
         title: Text(widget.title),
       ),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
-          ],
-        ),
-      ),
+          child: ListView_Original(
+              wordlist: wordList, wordBoollist: wordBoolList)),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () {},
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+
+class ListView_Original extends StatefulWidget {
+  final List<String> wordlist;
+  final List<bool> wordBoollist;
+
+  ListView_Original({this.wordlist, this.wordBoollist});
+
+  @override
+  _ListView_OriginalState createState() => _ListView_OriginalState();
+}
+
+class _ListView_OriginalState extends State<ListView_Original> {
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+        itemCount: 100,
+        itemExtent: 50.0, //强制高度为50.0
+        itemBuilder: (BuildContext context, int index) {
+          return LabeledCheckbox(
+            label: widget.wordlist[index],
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            value: widget.wordBoollist[index],
+            onChanged: (bool newValue) {
+              setState(() {
+                widget.wordBoollist[index] = newValue;
+              });
+            },
+          );
+        });
+  }
+}
+
+class LabeledCheckbox extends StatelessWidget {
+  const LabeledCheckbox({
+    this.label,
+    this.padding,
+    this.value,
+    this.onChanged,
+  });
+
+  final String label;
+  final EdgeInsets padding;
+  final bool value;
+  final Function onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        onChanged(!value);
+      },
+      child: Padding(
+        padding: padding,
+        child: Row(
+          children: <Widget>[
+            Checkbox(
+              value: value,
+              onChanged: (bool newValue) {
+                onChanged(newValue);
+              },
+            ),
+            Expanded(child: Text(label))
+          ],
+        ),
+      ),
     );
   }
 }
