@@ -32,13 +32,15 @@ class _FancyFabState extends State<FancyFab>
       begin: Colors.blue,
       end: Colors.red,
     ).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: Interval(
-        0.00,
-        1.00,
-        curve: Curves.linear,
-      ),
-    ));
+        parent: _animationController,
+        curve: Interval(
+          0.00,
+          1.00,
+          curve: Curves.linear,
+        ),
+        reverseCurve: Curves.bounceOut));
+
+    //Curves 動畫 https://api.flutter.dev/flutter/animation/Curves-class.html
     super.initState();
   }
 
