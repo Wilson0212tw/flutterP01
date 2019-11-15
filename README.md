@@ -18,24 +18,24 @@ Flutter 中渲染是經歷了   Widget -> Element  -> RenderObject
 - en https://flutter.dev/docs/development/ui/widgets/layout
 - cn https://flutterchina.club/widgets/layout/
 
-Container :最基礎包含一個 widget 的單位
+- Container :最基礎包含一個 widget 的單位
 - https://api.flutter.dev/flutter/widgets/Container-class.html
 
-Center ：強制置中的作法,只有一個child
-Column : 多個widget, children為 List<Widget>, 綁成一個column
-Row : 多個wideget , children為 List<Widget>, 綁成一個row
+- Center ：強制置中的作法,只有一個child
+- Column : 多個widget, children為 List<Widget>, 綁成一個column
+- Row : 多個wideget , children為 List<Widget>, 綁成一個row
 
-Expanded : 充滿 （沒用過）
-Padding  https://api.flutter.dev/flutter/widgets/Padding-class.html
+- Expanded : 充滿 （沒用過）
+- Padding  https://api.flutter.dev/flutter/widgets/Padding-class.html
 
 
 # ThemeData  和 context 概念
 
-ThemeData 全局共用資訊 
-context 保存全局資訊
-Theme.of(context).textTheme 
-Theme.of(context).accentColor
-...
+- ThemeData 全局共用資訊 
+- context 保存全局資訊
+- Theme.of(context).textTheme 
+- Theme.of(context).accentColor
+ ...
 
 # controllere概念
 ## In flutter, controllers are a means to give control to the parent widget over its child state.
@@ -45,13 +45,13 @@ Theme.of(context).accentColor
 
 ## customize the behavior of a widget. You can pass a custom implementation of a controller.
 
-AnimationController 11/15說到
-HeroController （yet)
-TextEditingController (yet)
+- AnimationController 11/15說到
+- HeroController （yet)
+- TextEditingController (yet)
 
 
-11/15應該說到 animatedController /CurvedAnimation  / 些許list 
-11/22  更多animation / dataTable /StreamController/StreamBuilder
+- 11/15應該說到 animatedController /CurvedAnimation  / 些許list 
+- 11/22  更多animation / dataTable /StreamController/StreamBuilder
 
 
 
@@ -85,7 +85,7 @@ https://flutter.dev/docs/get-started/web
 - flutter create  --macos <project directory>
 
 詳細方法
-https://github.com/google/flutter-desktop-embedding
-https://github.com/flutter/flutter/wiki/Desktop-shells
+- https://github.com/google/flutter-desktop-embedding
+- https://github.com/flutter/flutter/wiki/Desktop-shells
 
 
