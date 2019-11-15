@@ -4,12 +4,12 @@ A new Flutter project.
 
 # Widget 概念
 
-Widget并不真正的渲染对象
-Flutter 中渲染是经历了   Widget -> Element  -> RenderObject 
+Widget並不真正的渲染對象
+Flutter 中渲染是經歷了   Widget -> Element  -> RenderObject 
 
-- statefulwidget:State的build 方法去构建控件。在 State 中，你可以动态改变数 setState之后改变的数据会触发Widget重新构建刷新
+- statefulwidget:State的build 方法去構建控制項。在 State 中，你可以動態改變數 setState之後改變的數據會觸發Widget重新構建刷新
 
-- StatelessWidget:通过build方法返回一个布局好的控件
+- StatelessWidget:通過build方法返回一個佈局好的控制項
 
 
 # Layout 概念
@@ -31,7 +31,7 @@ Padding  https://api.flutter.dev/flutter/widgets/Padding-class.html
 
 # ThemeData  和 context 概念
 
-ThemeData 全局共享資訊 
+ThemeData 全局共用資訊 
 context 保存全局資訊
 Theme.of(context).textTheme 
 Theme.of(context).accentColor
