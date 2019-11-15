@@ -51,55 +51,13 @@ class _FancyFabState extends State<FancyFab>
   animate() {
     if (!isOpened) {
       _animationController.forward();
+      // _animationController.fling();
     } else {
       _animationController.reverse();
     }
+
     isOpened = !isOpened;
   }
-
-  // Widget add() {
-  //   return new Container(
-  //     child: FloatingActionButton(
-  //       onPressed: null,
-  //       tooltip: 'Add',
-  //       child: Icon(Icons.add),
-  //     ),
-  //   );
-  // }
-
-  // Widget image() {
-  //   return new Container(
-  //     child: FloatingActionButton(
-  //       onPressed: null,
-  //       tooltip: 'Image',
-  //       child: Icon(Icons.image),
-  //     ),
-  //   );
-  // }
-
-  // Widget inbox() {
-  //   return new Container(
-  //     child: FloatingActionButton(
-  //       onPressed: null,
-  //       tooltip: 'Inbox',
-  //       child: Icon(Icons.inbox),
-  //     ),
-  //   );
-  // }
-
-  // Widget toggle() {
-  //   return new Container(
-  //     child: FloatingActionButton(
-  //       backgroundColor: _buttonColor.value,
-  //       onPressed: animate,
-  //       tooltip: 'Toggle',
-  //       child: AnimatedIcon(
-  //         icon: AnimatedIcons.menu_close,
-  //         progress: _animateIcon,
-  //       ),
-  //     ),
-  //   );
-  // }
 
   @override
   Widget build(BuildContext context) {

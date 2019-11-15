@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage>
                   width: MediaQuery.of(context).size.width / 5,
                   height: MediaQuery.of(context).size.width / 5),
               NavigationButton(
-                  routerString: '/page3',
+                  routerString: '/page4',
                   type: 4,
                   width: MediaQuery.of(context).size.width / 5,
                   height: MediaQuery.of(context).size.width / 5),
