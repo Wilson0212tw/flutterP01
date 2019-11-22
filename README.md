@@ -4,12 +4,19 @@ A new Flutter project.
 
 # Widget 概念
 
+![image](https://github.com/Wilson0212tw/flutterp01/blob/master/vs01.png)
+
 Widget並不真正的渲染對象
 Flutter 中渲染是經歷了   Widget -> Element  -> RenderObject 
 
 - statefulwidget:State的build 方法去構建控制項。在 State 中，你可以動態改變數 setState之後改變的數據會觸發Widget重新構建刷新
 
+![image](https://github.com/Wilson0212tw/flutterp01/blob/master/statefulwidget_N.png)
+
 - StatelessWidget:通過build方法返回一個佈局好的控制項
+
+
+![image](https://github.com/Wilson0212tw/flutterp01/blob/master/vs01.png)
 
 
 # Layout 概念
