@@ -29,11 +29,11 @@ final ThemeData themeData = ThemeData(
     primarySwatch: Colors.blue,
     textTheme: TextTheme(
         title: TextStyle(
-      // color: Colors.red,
-      // fontSize: 24.0,
-      // fontWeight: FontWeight.w900,
-      // letterSpacing: 20.0,
-    )));
+            // color: Colors.red,
+            // fontSize: 24.0,
+            // fontWeight: FontWeight.w900,
+            // letterSpacing: 20.0,
+            )));
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -42,9 +42,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: themeData,
-      home: HomePage(title: 'Flutter Demo Home Page'),
+      home: Page1(title: 'Flutter Demo Home Page'),
       routes: {
-        '/home': (context) => HomePage(),
+        '/home': (context) => HomePage(title: 'home'),
         '/page1': (context) => Page1(title: 'Page1'),
         '/page2': (context) => Page2(title: 'Page1'),
         '/page3': (context) => Page3(title: 'Page3'),

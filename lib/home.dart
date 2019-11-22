@@ -16,12 +16,12 @@ class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   //keys     https://www.youtube.com/watch?v=kn0EOS-ZiIc
   final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
-  ScrollController scrollController;
+  ScrollController scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
-    scrollController = ScrollController();
+
     // scrollController
     //   ..addListener(() {
     //     if (scrollController.offset > 0.0) {
@@ -94,7 +94,6 @@ class ListView_Original extends StatelessWidget {
 //
 //
 
-
 class ListView_Separated extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -107,8 +106,6 @@ class ListView_Separated extends StatelessWidget {
     );
   }
 }
-
-
 
 //
 //
@@ -133,10 +130,6 @@ class _InfiniteListViewState extends State<InfiniteListView> {
   @override
   void initState() {
     super.initState();
-    _words.insertAll(
-        0,
-        //每次生成2100单词
-        generateWordPairs().take(100).map((e) => e.asPascalCase).toList());
   }
 
   @override
@@ -152,7 +145,6 @@ class _InfiniteListViewState extends State<InfiniteListView> {
   }
 }
 
-
 //
 //
 //
@@ -173,7 +165,6 @@ class _InfiniteListViewState extends State<InfiniteListView> {
 //
 //
 //
-
 
 class CustomBottomBar extends StatelessWidget {
   const CustomBottomBar({Key key}) : super(key: key);
@@ -187,7 +178,7 @@ class CustomBottomBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           NavigationButton(
-              routerString: '/page1',
+              routerString: '/home',
               type: 1,
               width: MediaQuery.of(context).size.width / 5,
               height: MediaQuery.of(context).size.width / 5),
