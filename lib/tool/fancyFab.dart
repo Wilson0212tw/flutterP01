@@ -66,7 +66,10 @@ class _FancyFabState extends State<FancyFab>
     return Container(
       child: FloatingActionButton(
         backgroundColor: _buttonColor.value,
-        onPressed: animate,
+        onPressed: () {
+          animate();
+          widget.onPressed();
+        },
         tooltip: 'Toggle',
         child: AnimatedIcon(
           icon: AnimatedIcons.menu_close,

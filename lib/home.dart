@@ -16,6 +16,20 @@ class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   //keys     https://www.youtube.com/watch?v=kn0EOS-ZiIc
   final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
+  ScrollController scrollController;
+
+  @override
+  void initState() {
+    super.initState();
+    scrollController = ScrollController();
+    // scrollController
+    //   ..addListener(() {
+    //     if (scrollController.offset > 0.0) {
+    //       setState(() {});
+    //     }
+    //   });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,44 +41,33 @@ class _HomePageState extends State<HomePage>
         ),
         // floatingActionButtonAnimator: _FloatingButtonAnimator(),
         floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-        floatingActionButton: FancyFab(),
+        floatingActionButton: FancyFab(
+          onPressed: () {
+            scrollController.position.animateTo(0,
+                duration: Duration(milliseconds: 500),
+                curve: Curves.fastOutSlowIn);
+          },
+        ),
         // body: ListView_Original(),
         // body: ListView_Separated(),
-        body: InfiniteListView(),
-        bottomNavigationBar: BottomAppBar(
-          color: Colors.lightBlue,
-          shape: CircularNotchedRectangle(),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              NavigationButton(
-                  routerString: '/page1',
-                  type: 1,
-                  width: MediaQuery.of(context).size.width / 5,
-                  height: MediaQuery.of(context).size.width / 5),
-              NavigationButton(
-                  routerString: '/page2',
-                  type: 2,
-                  width: MediaQuery.of(context).size.width / 5,
-                  height: MediaQuery.of(context).size.width / 5),
-              NavigationButton(
-                  routerString: '/page3',
-                  type: 3,
-                  width: MediaQuery.of(context).size.width / 5,
-                  height: MediaQuery.of(context).size.width / 5),
-              NavigationButton(
-                  routerString: '/page4',
-                  type: 4,
-                  width: MediaQuery.of(context).size.width / 5,
-                  height: MediaQuery.of(context).size.width / 5),
-              SizedBox(width: MediaQuery.of(context).size.width / 5),
-            ],
-          ),
-        ));
+        body: InfiniteListView(scrollController: scrollController),
+        bottomNavigationBar: CustomBottomBar());
   }
 }
 
 //article https://medium.com/@agungsurya/create-a-simple-animated-floatingactionbutton-in-flutter-2d24f37cfbcc
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 class ListView_Original extends StatelessWidget {
   @override
@@ -78,92 +81,134 @@ class ListView_Original extends StatelessWidget {
   }
 }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 class ListView_Separated extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    //下划线widget预定义以供复用。
-    Widget divider1 = Divider(
-      color: Colors.blue,
-    );
-    Widget divider2 = Divider(color: Colors.green);
     return ListView.separated(
       itemCount: 100,
-      //列表项构造器
-      itemBuilder: (BuildContext context, int index) {
-        return ListTile(title: Text("$index"));
-      },
-      //分割器构造器
-      separatorBuilder: (BuildContext context, int index) {
-        return index % 2 == 0 ? divider1 : divider2;
-      },
+      itemBuilder: (BuildContext context, int index) =>
+          ListTile(title: Text("$index")),
+      separatorBuilder: (BuildContext context, int index) =>
+          Divider(color: Colors.green),
     );
   }
 }
 
+
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 class InfiniteListView extends StatefulWidget {
+  final ScrollController scrollController;
+  InfiniteListView({this.scrollController});
   @override
-  _InfiniteListViewState createState() => new _InfiniteListViewState();
+  _InfiniteListViewState createState() => _InfiniteListViewState();
 }
 
 class _InfiniteListViewState extends State<InfiniteListView> {
-  static const loadingTag = "##loading##"; //表尾标记
-  var _words = <String>[loadingTag];
+  var _words = <String>[];
 
   @override
   void initState() {
     super.initState();
-    _retrieveData();
+    _words.insertAll(
+        0,
+        //每次生成2100单词
+        generateWordPairs().take(100).map((e) => e.asPascalCase).toList());
   }
 
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-      itemCount: _words.length,
-      itemBuilder: (context, index) {
-        //如果到了表尾
-        if (_words[index] == loadingTag) {
-          //不足100条，继续获取数据
-          if (_words.length - 1 < 100) {
-            //获取数据
-            _retrieveData();
-            //加载时显示loading
-            return Container(
-              padding: const EdgeInsets.all(16.0),
-              alignment: Alignment.center,
-              child: SizedBox(
-                  width: 24.0,
-                  height: 24.0,
-                  child: CircularProgressIndicator(strokeWidth: 2.0)),
-            );
-          } else {
-            //已经加载了100条数据，不再获取数据。
-            return Container(
-                alignment: Alignment.center,
-                padding: EdgeInsets.all(16.0),
-                child: Text(
-                  "没有更多了",
-                  style: TextStyle(color: Colors.grey),
-                ));
-          }
-        }
-        //显示单词列表项
-        return ListTile(
-            contentPadding: EdgeInsets.only(left: 40),
-            title: Text(_words[index]));
-      },
-      separatorBuilder: (context, index) => Divider(height: .0),
+      itemCount: 100,
+      controller: widget.scrollController,
+      itemBuilder: (BuildContext context, int index) =>
+          ListTile(title: Text("$index")),
+      separatorBuilder: (BuildContext context, int index) =>
+          Divider(color: Colors.green),
     );
   }
+}
 
-  void _retrieveData() {
-    Future.delayed(Duration(seconds: 2)).then((e) {
-      _words.insertAll(
-          _words.length - 1,
-          //每次生成20个单词
-          generateWordPairs().take(20).map((e) => e.asPascalCase).toList());
-      setState(() {
-        //重新构建列表
-      });
-    });
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+class CustomBottomBar extends StatelessWidget {
+  const CustomBottomBar({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomAppBar(
+      color: Colors.lightBlue,
+      shape: CircularNotchedRectangle(),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          NavigationButton(
+              routerString: '/page1',
+              type: 1,
+              width: MediaQuery.of(context).size.width / 5,
+              height: MediaQuery.of(context).size.width / 5),
+          NavigationButton(
+              routerString: '/page2',
+              type: 2,
+              width: MediaQuery.of(context).size.width / 5,
+              height: MediaQuery.of(context).size.width / 5),
+          NavigationButton(
+              routerString: '/page3',
+              type: 3,
+              width: MediaQuery.of(context).size.width / 5,
+              height: MediaQuery.of(context).size.width / 5),
+          NavigationButton(
+              routerString: '/page4',
+              type: 4,
+              width: MediaQuery.of(context).size.width / 5,
+              height: MediaQuery.of(context).size.width / 5),
+          SizedBox(width: MediaQuery.of(context).size.width / 5),
+        ],
+      ),
+    );
   }
 }
