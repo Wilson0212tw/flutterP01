@@ -16,7 +16,7 @@ Flutter 中渲染是經歷了   Widget -> Element  -> RenderObject
 - StatelessWidget:通過build方法返回一個佈局好的控制項
 
 
-![image](https://github.com/Wilson0212tw/flutterp01/blob/master/vs01.png)
+![image](https://github.com/Wilson0212tw/flutterp01/blob/master/plugin01.png)
 
 
 # Layout 概念
